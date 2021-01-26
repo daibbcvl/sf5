@@ -2,6 +2,7 @@ security:
     encoders:
         App\Entity\User:
             algorithm: auto
+        Symfony\Component\Security\Core\User\User: 'auto'
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -9,16 +10,35 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        backend_users:
+            memory:
+                users:
+                    john_admin@yahoo.com: { password: '$argon2id$v=19$m=65536,t=4,p=1$bsdjQxCWHY/PD1U8yotLhg$H4UvApqXe6QC3cWLwHJ9n/5h28FCPuf+jBwLvRidQ20', roles: ['ROLE_ADMIN'] }
+                    jane_admin@yahoo.com: { password: '$argon2id$v=19$m=65536,t=4,p=1$bsdjQxCWHY/PD1U8yotLhg$H4UvApqXe6QC3cWLwHJ9n/5h28FCPuf+jBwLvRidQ20', roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }
+        all_users:
+            chain:
+                providers: ['app_user_provider', 'backend_users']
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: app_user_provider
+            provider: all_users
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+#                    - App\Security\LoginFormAuthenticator
+                    - App\Security\LoginFormInMemoryAuthenticator
+#                entry_point: App\Security\LoginFormInMemoryAuthenticator
             logout:
                 path: app_logout
                 target: /
+#        second:
+#            anonymous: lazy
+#            provider: backend_users
+#            guard:
+#                authenticators:
+#                    - App\Security\LoginFormInMemoryAuthenticator
+#            logout:
+#                path: app_logout
+#                target: /
