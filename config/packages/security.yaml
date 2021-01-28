@@ -1,3 +1,5 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
 security:
     encoders:
         App\Entity\User:
@@ -9,6 +11,8 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        oauth:
+            id: knpu.oauth2.user_provider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -19,6 +23,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\GoogleAuthenticator
+                    - App\Security\FacebookAuthenticator
+                entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
                 target: /
