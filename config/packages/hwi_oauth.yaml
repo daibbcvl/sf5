@@ -1,0 +1,31 @@
+hwi_oauth:
+  firewall_names: [main]
+  # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
+  resource_owners:
+    auth0:
+      type: oauth2
+      class: 'App\Auth0ResourceOwner'
+      client_id: "%env(OAUTH_AUTH0_CLIENT_ID)%"
+      client_secret: "%env(OAUTH_AUTH0_CLIENT_SECRET)%"
+      base_url: "https://%env(AUTH0_DOMAIN)%"
+      scope: "openid profile email"
+    facebook:
+      type:                facebook
+      client_id:           "%env(FB_CLIENT_ID)%"
+      client_secret:       "%env(FB_CLIENT_SECRET)%"
+      options:
+        display: popup #dialog is optimized for popup window
+        auth_type: rerequest # Re-asking for Declined Permissions
+    google:
+      type:                google
+      client_id:           "%env(GOOGLE_CLIENT_ID)%"
+      client_secret:       "%env(GOOGLE_CLIENT_SECRET)%"
+      scope:               "https://www.googleapis.com/auth/plus.login"
+      options:
+        request_visible_actions: "http://schemas.google.com/AddActivity http://schemas.google.com/CommentActivity"
+
+    github:
+      type:                github
+      client_id:            "%env(OAUTH_GITHUB_CLIENT_ID)%"
+      client_secret:        "%env(OAUTH_GITHUB_CLIENT_SECRET)%"
+      scope:               'user:email,public_repo'

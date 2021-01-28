@@ -60,6 +60,28 @@
                                         </button>
                                     </div>
                                 </div>
+                                <a
+                                        href="{{ path('hwi_oauth_service_redirect', {'service': 'auth0'}) }}"
+                                        style="color: #fff;"
+                                >
+                                    <div class="card mb-3" style="background-color: #e8542e">
+                                        <div class="card-body" style="padding: 0;">
+                                            <img src="https://i.imgur.com/02VeCz0.png" height="40" />
+                                            Connect with Auth0
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                                    <span>Facebook connect</span>
+                                </a>
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">
+                                    <span>Google login</span>
+                                </a>
+
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'github' }) }}">
+                                    <span>GitHub login</span>
+                                </a>
+
                             </form>
                         </div>
                     </div>

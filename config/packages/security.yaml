@@ -18,27 +18,31 @@ security:
         all_users:
             chain:
                 providers: ['app_user_provider', 'backend_users']
+        oauth_hwi:
+            id: hwi_oauth.user.provider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
-            provider: all_users
+            anonymous: ~
+            provider: oauth_hwi
+            oauth:
+                resource_owners:
+                    auth0: "/auth0/callback"
+                    facebook: "/login/check-facebook"
+                    google: "/login/check-google"
+                    github: "/connect/github/check"
+                login_path: /
+                failure_path: /
+                default_target_path: /list
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider
             guard:
                 authenticators:
-#                    - App\Security\LoginFormAuthenticator
                     - App\Security\LoginFormInMemoryAuthenticator
-#                entry_point: App\Security\LoginFormInMemoryAuthenticator
             logout:
                 path: app_logout
                 target: /
-#        second:
-#            anonymous: lazy
-#            provider: backend_users
-#            guard:
-#                authenticators:
-#                    - App\Security\LoginFormInMemoryAuthenticator
-#            logout:
-#                path: app_logout
-#                target: /
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
