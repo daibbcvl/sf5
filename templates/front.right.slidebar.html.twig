@@ -1,0 +1,75 @@
+<div class="col-md-4 sidebar ftco-animate">
+    <div class="sidebar-box">
+        <form action="#" class="search-form">
+            <div class="form-group">
+                <span class="icon fa fa-search"></span>
+                <input type="text" class="form-control" placeholder="Tìm kiếm">
+            </div>
+        </form>
+    </div>
+    {% if categories is defined %}
+    <div class="sidebar-box ftco-animate">
+        <h3>Danh mục</h3>
+        <div class="categories">
+        {% for item in categories %}
+            <li><a href="{{ path('blog_category', {categorySlug:item.categorySlug}) }}">{{ item.name }} <span>({{ item.postCount }})</span></a></li>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {#<div class="sidebar-box ftco-animate">#}
+        {#<h3>Recent Blog</h3>#}
+        {#<div class="block-21 mb-4 d-flex">#}
+            {#<a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>#}
+            {#<div class="text">#}
+                {#<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>#}
+                {#<div class="meta">#}
+                    {#<div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>#}
+                    {#<div><a href="#"><span class="icon-person"></span> Admin</a></div>#}
+                    {#<div><a href="#"><span class="icon-chat"></span> 19</a></div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="block-21 mb-4 d-flex">#}
+            {#<a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>#}
+            {#<div class="text">#}
+                {#<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>#}
+                {#<div class="meta">#}
+                    {#<div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>#}
+                    {#<div><a href="#"><span class="icon-person"></span> Admin</a></div>#}
+                    {#<div><a href="#"><span class="icon-chat"></span> 19</a></div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="block-21 mb-4 d-flex">#}
+            {#<a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>#}
+            {#<div class="text">#}
+                {#<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>#}
+                {#<div class="meta">#}
+                    {#<div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>#}
+                    {#<div><a href="#"><span class="icon-person"></span> Admin</a></div>#}
+                    {#<div><a href="#"><span class="icon-chat"></span> 19</a></div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+
+
+    {% if tags is defined %}
+        <div class="sidebar-box ftco-animate">
+            <h3>Tags</h3>
+            <div class="tagcloud">
+                {% for item in tags %}
+                    <a href="{{ path('blog_tag', {tagSlug: item.tagSlug}) }}" class="tag-cloud-link">{{ item.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {#<div class="sidebar-box ftco-animate">#}
+        {#<h3>Paragraph</h3>#}
+        {#<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>#}
+    {#</div>#}
+    {##}
+</div>

@@ -1,0 +1,81 @@
+.product-widget-wrap[_ngcontent-jkt-c41] {
+    margin: 0 auto;
+    width: 98%;
+    max-width: 75rem;
+}
+.product-widget-wrap[_ngcontent-jkt-c41] a.product-content-link[_ngcontent-jkt-c41] {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-widget-wrap[_ngcontent-jkt-c41] .product-widget-content[_ngcontent-jkt-c41] {
+    width: 100%;
+    padding-left: 6px;
+    margin: 0;
+}
+
+.product-widget-wrap[_ngcontent-jkt-c41] .product-widget-content[_ngcontent-jkt-c41] .product-widget-title[_ngcontent-jkt-c41] {
+    display: flex;
+    align-items: center;
+}
+
+
+#main-content .product-widget-wrap[_ngcontent-jkt-c41] .product-widget-content[_ngcontent-jkt-c41] .product-widget-title[_ngcontent-jkt-c41] h2[_ngcontent-jkt-c41] {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #1d1d1d;
+    line-height: 20px;
+    margin: 10px 0;
+}
+
+.product-widget-wrap i {
+    /*opacity: 0;*/
+    transition: all .2s ease-out 0s;
+    transition: all 0.5s ease;
+    position: relative;
+    top: 1px;
+    font-size: 1.7rem;
+    margin-left: 8px;
+}
+
+.material-icons {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga";
+    font-family: "Material Icons",sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+}
+
+.product-widget-wrap[_ngcontent-jkt-c41] .product-widget-content[_ngcontent-jkt-c41] p[_ngcontent-jkt-c41] {
+    font-size: 1rem;
+    line-height: 19px;
+    color: #1d1d1d;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.slide-three{
+    margin-top: 0 !important;
+}
+
+.slide-three .slick-slide {
+    margin: 0px 10px;
+}
+
+#main-content .slider {
+    width: 98%;
+}

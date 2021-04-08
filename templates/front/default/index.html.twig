@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+    <title>Buy Wood Online - Wood and Lumber LLC</title>
+    <meta http-equiv="TITLE" content="Buy Wood Online - Wood and Lumber LLC">
+    <meta name="DESCRIPTION" content="Quality Wood available at Wood and Lumber LLC Store, Vietnam's leading Wood supplier.">
+    <meta name="keywords" content="Wood & Lumber, Lumber, buy lumber, buy wood" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Buy Wood Online - Wood and Lumber LLC" />
+    <meta property="og:description" content="Quality Wood available at Wood and Lumber LLC Store, Vietnam's leading Wood supplier." />
+    <meta property="og:url" content="http://www.woodandlumberllc.com" />
+    <meta property="og:site_name" content="Buy Wood Online - Wood and Lumber LLC" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="When it comes to fine walnut and thick stock oak, trust the name that thousands  Wood and Lumber LLC. CA 18-05, Canary Tower, Diamond Island, Binh Trung Tay Ward, District 2, Hochiminh City, Vietnam" />
+{% endblock %}
+{% block content %}
+    <h2>Bài viết mới nhất</h2>
+
+    {% for post in posts %}
+        <div class="intro-box">
+            <div class="box-left"></div>
+            <div class="box-right">
+                <h3><a href="{{ path('blog_details', {slug:post.slug}) }}">{{ post.title }}</a></h3>
+                <p>{{ post.summary }}</p>
+            </div>
+            <div class="clear-fix"></div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

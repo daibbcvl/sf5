@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="slick/slick.css">
+  	<link rel="stylesheet" type="text/css" href="slick/slick-theme.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/pop-up.js"></script>
+	<script type="text/javascript" src="js/slider.js"></script>
+	<script src="slick/slick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="login-popup" class="white_content" > 
+	<button id="btn-close">×</button>	
+	<table align="center" cellpadding="5" cellspacing="5" >
+    <tr>
+    <td colspan="2" class="Title" align="center">Login Form</td>
+    </tr>
+        <tr>
+            <td class="label">              
+                UserName:</td>
+            <td align="center">
+                
+                <input id="Text1" type="text" /></td>
+        </tr>
+       <tr>
+            <td class="label">              
+                Password:</td>
+            <td align="center">
+                <input id="Text2" type="text" /></td>
+        </tr>
+        <tr>
+            <td>              
+              <input id="Button1" type="button" value="Login" /></td></tr></table>
+           </td></tr>
+    </table>   
+    </div>
+ <div id="fade" class="black_overlay"></div>
+	<div class="header">
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		    <div class="top-container">
+		        <a class="navbar-brand" href="{{ path('default') }}"><img src="images/logo.png"></a>
+		        <div class="collapse navbar-collapse" id="ftco-nav">
+		            <ul class="navbar-nav ml-auto">
+		                <li class="nav-item"><a href="{{ path('default') }}" class="nav-link">Trang chủ</a></li>
+		                <li class="nav-item"><a href="{{ path('about') }}" class="nav-link">Giới thiệu</a></li>
+		                <li class="nav-item"><a href="{{ path('blog_index') }}" class="nav-link">Blog</a></li>
+		                <li class="nav-item">
+		                	<a id="login-button" href="#" class="nav-link">Đăng nhập / Đăng ký</a></li>
+		            </ul>
+		        </div>
+		    </div>
+		</nav>
+	</div>
+	<div _ngcontent-mka-c32="" class="search-widget ng-star-inserted">
+		<div _ngcontent-mka-c32="" class="product-tiles">
+			<ul _ngcontent-mka-c32="" class="head-ul">
+				<!---->
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile active ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button flight selected" id="product-tile-flight" aria-selected="true" style="background-color: rgb(255, 255, 255); color: rgb(225, 0, 0);">Đi trong nước</button>
+				</li>
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button bags_meals_seats" id="product-tile-bags_meals_seats" aria-selected="false" style="background-color: rgb(27, 90, 186); color: rgb(255, 255, 255);"><!----> Đi nước ngoài </button>
+				</li>
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button hotels" id="product-tile-hotels" aria-selected="false" style="background-color: rgb(247, 109, 60); color: rgb(255, 255, 255);"><!----> Ẩm thực </button>
+				</li>
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button holiday_packages" id="product-tile-holiday_packages" aria-selected="false" style="background-color: rgb(145, 60, 205); color: rgb(255, 255, 255);"><!---->Khách sạn</button>
+				</li>
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button activities" id="product-tile-activities" aria-selected="false" style="background-color: rgb(241, 95, 116); color: rgb(255, 255, 255);"><div _ngcontent-mka-c32="" class="product-tile-badge-wrap ng-star-inserted"><div _ngcontent-mka-c32="" class="product-tile-badge" style="color: rgb(241, 95, 116); border: 1px solid rgb(241, 95, 116); background: rgb(255, 255, 255);"> SALE! </div></div><img _ngcontent-mka-c32="" aria-hidden="true" src="https://a.staticaa.com/images/misc/product-tiles/icon-product-tiles-activities.svg"> Activities </button>
+				</li>
+				<!---->
+				<li _ngcontent-mka-c32="" class="product-tile ng-star-inserted" style="width: calc(16.6667% - 8px);">
+					<button _ngcontent-mka-c32="" type="button" class="product-tile-button ourshop" id="product-tile-ourshop" aria-selected="false" style="background-color: rgb(44, 168, 194); color: rgb(255, 255, 255);"><img _ngcontent-mka-c32="" aria-hidden="true" src="https://a.staticaa.com/images/misc/product-tiles/icon-product-tiles-ourshop.svg"> OURSHOP </button>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="adBanner">
+		<section class="regular slider">
+		    <div>
+		      <img src="http://placehold.it/350x300?text=1">
+		    </div>
+		    <div>
+		      <img src="http://placehold.it/350x300?text=2">
+		    </div>
+		    <div>
+		      <img src="http://placehold.it/350x300?text=3">
+		    </div>
+		    <div>
+		      <img src="http://placehold.it/350x300?text=4">
+		    </div>
+		    <div>
+		      <img src="http://placehold.it/350x300?text=5">
+		    </div>
+		    <div>
+		      <img src="http://placehold.it/350x300?text=6">
+		    </div>
+  		</section>
+	</div>
+	<div id="content">
+		<div id="main-content">
+			<h2>Bài viết mới nhất</h2>
+			<div class="intro-box">
+				<div class="box-left"><img src="images/qg3.jpg"></div> 
+				<div class="box-right">
+					<h3><a href="#">Khám phá Melbourne xinh đẹp</a></h3>
+					<p>Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss </p>
+				</div> 
+				<div class="clear-fix"></div>
+			</div>
+			<div class="intro-box">
+				<div class="box-left"><img src="images/qg3.jpg"></div> 
+				<div class="box-right">
+					<h3><a href="#">Khám phá Melbourne xinh đẹp</a></h3>
+					<p>Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss </p>
+				</div> 
+				<div class="clear-fix"></div>
+			</div>
+
+			<div class="intro-box">
+				<div class="box-left"><img src="images/qg3.jpg"></div> 
+				<div class="box-right">
+					<h3><a href="#">Khám phá Melbourne xinh đẹp</a></h3>
+					<p>Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss </p>
+				</div> 
+				<div class="clear-fix"></div>
+			</div>
+			<div class="intro-box">
+				<div class="box-left"><img src="images/qg3.jpg"></div> 
+				<div class="box-right">
+					<h3><a href="#">Khám phá Melbourne xinh đẹp</a></h3>
+					<p>Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss </p>
+				</div> 
+				<div class="clear-fix"></div>
+			</div>
+			<div class="intro-box">
+				<div class="box-left"><img src="images/qg3.jpg"></div> 
+				<div class="box-right">
+					<h3><a href="#">Khám phá Melbourne xinh đẹp</a></h3>
+					<p>Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss Hotel deals you don't want to miss  Hotel deals you don't want to miss Hotel deals you don't want to miss </p>
+				</div> 
+				<div class="clear-fix"></div>
+			</div>
+			
+		</div>
+		<div id="right-sidebar">
+			<ul>
+				<li><img src="images/sapa.jpg"></li>
+				<li><img src="images/halong.jpg"></li>
+				<li><img src="images/da-nang.jpg"></li>
+			</ul>
+		</div>
+		<div class="clear-fix"></div>
+	</div>
+	<div id="footer">
+		<div class="footertop row">
+			<div  class="socialMedia  col s12">
+				<div class="b ng-star-inserted">
+					<h2 _ngcontent-alw-c37="" class="connect ng-star-inserted">Kết nối với chúng tôi</h2>
+				</div>
+				<div class="b ng-star-inserted"></div>
+				<div class="b ng-star-inserted">
+					<span class="imgspan d ng-star-inserted">
+						<a target="_blank" href="https://www.facebook.com/AirAsia" class="ng-star-inserted"><img alt="AirAsia Facebook" src="https://a.staticaa.com/images/logo/facebook-icon.png"></a>
+					</span>
+					<span class="imgspan d ng-star-inserted">
+						<a target="_blank" href="https://www.twitter.com/AirAsia" class="ng-star-inserted">
+							<img alt="AirAsia Twitter" src="https://a.staticaa.com/images/logo/twitter-icon.png"></a>
+					</span>
+					<span class="imgspan d ng-star-inserted">
+						<a target="_blank" href="https://www.instagram.com/airasia/" class="ng-star-inserted"><img alt="AirAsia Instagram" src="https://a.staticaa.com/images/logo/instagram-icon.png"></a><!----></span><!----><!----><!----><span _ngcontent-alw-c37="" class="imgspan d ng-star-inserted"><!----><a _ngcontent-alw-c37="" target="_blank" href="https://www.youtube.com/user/airasia" class="ng-star-inserted"><img alt="AirAsia Youtube" src="https://a.staticaa.com/images/logo/youtube-icon.png"></a><!----></span>
+					</div>
+				</div>
+		</div>
+		<div class="divider"></div>
+		<div class="footerbottom row">
+			<div class="travelinformation col l3">
+				<div class="ng-star-inserted">
+					<h2 class="ng-star-inserted">LAP Travels</h2></div>
+				<div class="ng-star-inserted">
+					<p>LAP Travels là website chia sẻ thông tin du lịch hàng đầu Việt Nam. Đến với LAP Travels, tận hưởng chuyến đi thú vị nhất với lịch trình cực cool ♫♫♫♥♥</p>
+				</div>	
+			</div>
+			<div class="travelinformation col l3">
+				<div class="ng-star-inserted">
+					<h2 class="ng-star-inserted">Information</h2></div>
+				<div class="ng-star-inserted">
+					<ul class="list-unstyled">
+		                <li><a href="#" class="py-2 d-block">About</a></li>
+		                <li><a href="#" class="py-2 d-block">Service</a></li>
+		                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+		                <li><a href="#" class="py-2 d-block">Become a partner</a></li>
+		                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+		                <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+	              </ul>
+				</div>	
+			</div>
+			<div class="travelinformation col l3">
+				<div class="ng-star-inserted">
+					<h2 class="ng-star-inserted">Customer support</h2></div>
+				<div class="ng-star-inserted">
+					<ul class="list-unstyled">
+		                <li><a href="#" class="py-2 d-block">FAQ</a></li>
+		                <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+		                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+		                <li><a href="#" class="py-2 d-block">How it works</a></li>
+		                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+	              	</ul>
+				</div>	
+			</div>
+			<div class="contact-us col l3">
+				<div class="ng-star-inserted">
+					<h2 class="ng-star-inserted">Liên hệ với chúng tôi</h2></div>
+				<div class="ng-star-inserted">
+					<ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	              </ul>
+				</div>	
+			</div>
+			
+			<div class="clear-fix"></div>
+		</div>
+	</div>
+	<!-- <footer class="ftco-footer ftco-bg-dark ftco-section">
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+ 	</p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+
+
+
+</body>
+</html>
