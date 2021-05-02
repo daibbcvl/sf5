@@ -1,0 +1,85 @@
+{# templates/list/index.html.twig #} {% extends 'base.html.twig' %} {% block
+    body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                        <div class="card-header"></div>
+                        {% if app.user != null %}
+                            <table class="table">
+                                <tr>
+                                    <th>Coin</th>
+                                    <th>Available</th>
+                                    <th>On Order</th>
+                                    <th>Amount</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                    <th>Bought</th>
+                                    <th>Target</th>
+                                    <th>Current</th>
+                                    <th>Profit</th>
+                                </tr>
+                                {% for key, item in balances %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ item.available }}</td>
+                                        <td>{{ item.onOrder }}</td>
+                                        <td>{{ item.amount }}</td>
+                                        <td>{{ item.price }}</td>
+                                        <td>{{ item.total|number_format(2, '.', ',') }}</td>
+                                        <td>{{ item.bought|number_format(2, '.', ',') }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ (item.total -item.bought)|number_format(2, '.', ',') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <p align="right"><b>Total: </b> {{ total }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if app.user == null %}
+                    <a href="{{ path('app_login') }}" class="btn btn-info">
+                        You need to login to see the list 😜😜 >></a
+                    >
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://static.stringee.com/web_phone/lastest/js/StringeeSoftPhone-lastest.js"></script>
+    <script>
+        var config = {
+            showMode: 'full',//full | min | none
+            top: 45,
+            left: 50,
+            //right: 810,
+
+            arrowLeft: 155,
+            arrowDisplay: 'top',//top | bottom | none
+
+            //list your Stringee Number
+            fromNumbers: [{alias: 'Number-1', number: '+84899199586'}, {alias: 'Number-2', number: '+2222'}]
+        };
+        StringeeSoftPhone.init(config);
+
+        var access_token2 = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTS3kyeW56U242b2NTQWRoRjdxOTRwMXA0cWU5V3psSWlPLTE2MTc2OTE2MjEiLCJpc3MiOiJTS3kyeW56U242b2NTQWRoRjdxOTRwMXA0cWU5V3psSWlPIiwiZXhwIjoxNjE3Njk1MjIxLCJ1c2VySWQiOiJBQzI4NTZmM2NmYzk4NTNlZGY3MjM0ZDA0N2NiMWM0MTU2In0.1KXo9kVgdP6QbXxs5mngQGDyrTWaL6MewPQkHDVnr2s';
+
+        StringeeSoftPhone.on('displayModeChange', function (event) {
+            console.log('displayModeChange', event);
+            if (event === 'min') {
+                StringeeSoftPhone.config({arrowLeft: 75});
+            } else if (event === 'full') {
+                StringeeSoftPhone.config({arrowLeft: 155});
+            }
+        });
+
+        StringeeSoftPhone.on('requestNewToken', function () {
+            console.log('requestNewToken+++++++');
+            StringeeSoftPhone.connect(access_token2);
+        });
+
+        StringeeSoftPhone.connect(access_token2);
+    </script>
+{% endblock %}

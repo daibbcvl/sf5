@@ -4,6 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    BN_KEY: '%env(BN_KEY)%'
+    BN_SECRET: '%env(BN_SECRET)%'
+    HITBC_KEY: '%env(HITBC_KEY)%'
+    HITBTC_SECRET: '%env(HITBTC_SECRET)%'
+    POLO_KEY: '%env(POLO_KEY)%'
+    POLO_SECRET: '%env(POLO_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -38,3 +44,25 @@ services:
 
     App\Security\LoginFormInMemoryAuthenticator:
         $userProvider: '@security.user.provider.concrete.backend_users'
+
+    cache.client:
+        class: Predis\Client
+        factory: [ 'Symfony\Component\Cache\Adapter\RedisAdapter', createConnection ]
+        arguments:
+            - '%env(CONTENT_CACHE_URL)%'
+            - [ persistent: 1 ]
+        public: true
+    cache.adapter:
+        class: Symfony\Component\Cache\Adapter\RedisTagAwareAdapter
+        arguments:
+            - '@cache.client'
+#
+#    App\Services\BinanceCache:
+#        class: App\Services\BinanceCache
+#        arguments:
+#            - $cache: "@cache.adapter"
+#            - $binaneKey: '%env(BN_KEY)%'
+#            - $binanceSecret: '%env(BN_SECRET)%'
+#        public: true
+
+

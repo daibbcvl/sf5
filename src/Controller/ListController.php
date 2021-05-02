@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Binance\API;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,5 +33,24 @@ class ListController extends AbstractController
         return $this->render('list/index.html.twig', [
             'companies' => $companies,
         ]);
+    }
+
+    /**
+     * @Route("/test", name="test")
+     * @param Request $request
+     * @return Response
+     */
+    public function test(Request $request)
+    {
+        //dd($this->getParameter('BN_KEY'));
+        $api = new API($this->getParameter('BN_KEY'),$this->getParameter('BN_SECRET'));
+
+        $ticker = $api->prices(); // M
+        $balances = $api->balances($ticker);
+
+
+
+        dd($balances);
+
     }
 }

@@ -1,0 +1,47 @@
+{# templates/list/index.html.twig #} {% extends 'base.html.twig' %} {% block
+    body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                        <div class="card-header"></div>
+
+
+
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Binance</th>
+                                    <th>HitBtc</th>
+                                    <th>Polo</th>
+                                    <th>Bittrex</th>
+                                    <th>Cake</th>
+                                    <td>Deviation</td>
+                                </tr>
+                                {% for coin in coins %}
+                                    <tr>
+                                        <td>{{ coin.name }}</td>
+                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'binance'}) }}">{{ coin.binancePrice|number_format(6, '.', ',') }}</a></td>
+                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'hitbtc'}) }}">{{ coin.hitBtcPrice|number_format(6, '.', ',') }}</a></td>
+                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'poloniex'}) }}">{{ coin.poloPrice|number_format(6, '.', ',') }}</a></td>
+                                        <td>{{ coin.bittrexPrice|number_format(6, '.', ',') }}</td>
+                                        <td>{{ coin.cakePrice|number_format(6, '.', ',') }}</td>
+                                        <td>{{ coin.percentage|number_format(2, '.', ',')}} %</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+
+                    </div>
+                </div>
+                {% if app.user == null %}
+                    <a href="{{ path('app_login') }}" class="btn btn-info">
+                        You need to login to see the list 😜😜 >></a
+                    >
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

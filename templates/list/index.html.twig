@@ -5,21 +5,30 @@
             <div class="col-md-12">
                 <div class="card bg-light mb-3 mt-3">
                     <div class="card-body">
-                        <div class="card-header">List of top technology companies</div>
-                        {% if app.user != null %}
-                            <table class="table">
+                        <div class="card-header"></div>
+
+
+
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Binance</th>
+                                <th>HitBtc</th>
+                                <th>Polo</th>
+                                <td>Deviation</td>
+                            </tr>
+                            {% for coin in coins %}
                                 <tr>
-                                    <th>Company Name</th>
-                                    <th>Market Value</th>
+                                    <td>{{ coin.name }}</td>
+                                    <td>{{ coin.binancePrice }}</td>
+                                    <td>{{ coin.hitBtcPrice }}</td>
+                                    <td>{{ coin.poloPrice }}</td>
+
+                                    <td></td>
                                 </tr>
-                                {% for key, item in companies %}
-                                    <tr>
-                                        <td>{{ key }}</td>
-                                        <td>{{ item }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        {% endif %}
+                            {% endfor %}
+                        </table>
+
                     </div>
                 </div>
                 {% if app.user == null %}
@@ -30,4 +39,6 @@
             </div>
         </div>
     </div>
+
+
 {% endblock %}
