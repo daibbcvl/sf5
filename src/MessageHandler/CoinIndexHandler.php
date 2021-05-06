@@ -48,9 +48,9 @@ class CoinIndexHandler implements MessageHandlerInterface, LoggerAwareInterface
 
         foreach ($response->data->marketPairs as $exchange) {
 
-            if($exchange->marketReputation == 0 ) {
-                continue;
-            }
+//            if($exchange->marketReputation == 0 ) {
+//                continue;
+//            }
             if ($exchange->exchangeSlug == 'binance') {
                 $coin->setBinancePrice($exchange->price);
             }

@@ -321,27 +321,22 @@ class BalanceController extends AbstractController
      */
     public function deviation(Request $request, EntityManagerInterface $entityManager, CoinRepository $repository)
     {
-        $coins = $repository->findAll();
-      //  dd($coins);
+        $coins = $repository->findBy([], ['percentage' => 'DESC']);
+
         $chooseCoins = [];
         /** @var Coin $coin */
         foreach ($coins as $coin) {
 
-            $max = max($coin->getBinancePrice(), $coin->getHitBtcPrice(), $coin->getPoloPrice(), $coin->getBittrexPrice());
-            $min = min($coin->getBinancePrice(), $coin->getHitBtcPrice(), $coin->getPoloPrice(), $coin->getBittrexPrice());
+            $max = max($coin->getBinancePrice(), $coin->getHitBtcPrice(), $coin->getPoloPrice());
+            $min = min($coin->getBinancePrice(), $coin->getHitBtcPrice(), $coin->getPoloPrice());
 
             $percentage = $min ==0 ? 0: ($max -$min)/$min *100;
             $coin->setPercentage($percentage);
-            if ($percentage > 5) {
-                $chooseCoins [] = $coin;
-            }
+
 
         }
 
         $entityManager->flush();
-        $coins = $chooseCoins;
-       // dd($coins);
-        //dd($coins);
         return $this->render('deviation/index.html.twig', [
             'coins' => $coins,
 

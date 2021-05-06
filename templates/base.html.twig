@@ -22,9 +22,18 @@
             <li><a class="nav-link" href="{{ path('list') }}">View List</a></li>
             <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
         {% else %}
-            <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
+{#            <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>#}
+{#            <li>#}
+{#                <a class="nav-link" href="{{ path('registration') }}">Register</a>#}
+{#            </li>#}
             <li>
-                <a class="nav-link" href="{{ path('registration') }}">Register</a>
+                <a class="nav-link" href="{{ path('indexed_truncate') }}">Truncate</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ path('indexed_index') }}">Create coin list</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ path('map') }}">Mapping</a>
             </li>
         {% endif %}
     </ul>

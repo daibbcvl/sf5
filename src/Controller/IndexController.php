@@ -44,7 +44,25 @@ class IndexController extends AbstractController
         $this->call('pancakeswap', $repository, $entityManager);
 
 
-        dd('Indexing done');
+        return $this->redirectToRoute('coin_deviation');
+
+
+    }
+
+    /**
+     * @Route("/truncate", name="indexed_truncate")
+     * @param Request $request
+     * @return Response
+     */
+    public function truncate(EntityManagerInterface $entityManager)
+    {
+
+        $connection = $entityManager->getConnection();
+        $platform = $connection->getDatabasePlatform();
+
+        $connection->executeUpdate($platform->getTruncateTableSQL('coin'));
+
+        return $this->redirectToRoute('coin_deviation');
 
 
     }
@@ -94,9 +112,7 @@ class IndexController extends AbstractController
 
         }
 
-//
-
-        dd('Mapping done');
+        return $this->redirectToRoute('coin_deviation');
     }
 
     /**
@@ -109,6 +125,18 @@ class IndexController extends AbstractController
      */
     public function getCurrentPrice(string $coin, string $exchange, CoinRepository $repository, EntityManagerInterface $entityManager)
     {
+
+
+        $this->getPrice($entityManager, $repository, $coin, 'binance');
+        $this->getPrice($entityManager, $repository, $coin, 'hitbtc');
+        $this->getPrice($entityManager, $repository, $coin, 'poloniex');
+
+        return $this->redirectToRoute('coin_deviation');
+
+    }
+
+    private function getPrice(EntityManagerInterface $entityManager, CoinRepository $repository, string $coin, string $exchange)
+    {
         $coinObject = $repository->findOneBy(['name' => $coin]);
 
         switch ($exchange) {
@@ -117,20 +145,23 @@ class IndexController extends AbstractController
                 $priceParser = new PriceParser($this->getParameter('BN_KEY'), $this->getParameter('BN_SECRET'));
                 $btcPrice = $priceParser->getBTCPrice();
                 $bnbPrice = $priceParser->getBNBPrice();
+                $ethPrice = $priceParser->getETHPrice();
 
                 $balanceParser = new BalanceParser($this->getParameter('BN_KEY'), $this->getParameter('BN_SECRET'));
                 $ticker = $balanceParser->getTicker();
 
+
                 if (isset($ticker["{$coin}USDT"])) {
                     $price = $ticker["{$coin}USDT"];
-                    $coinObject->setBinancePrice($price);
+                }
+                elseif (isset($ticker["{$coin}ETH"])) {
+                    $price = floatval($ticker["{$coin}ETH"]) * $ethPrice;
                 } elseif (isset($ticker["{$coin}BNB"])) {
                     $price = floatval($ticker["{$coin}BNB"]) * $bnbPrice;
-                    $coinObject->setBinancePrice($price);
                 } elseif (isset($ticker["{$coin}BTC"])) {
                     $price = floatval($ticker["{$coin}BTC"]) * $btcPrice;
-                    $coinObject->setBinancePrice($price);
                 }
+                $coinObject->setBinancePrice($price);
 
                 break;
             case 'hitbtc':
@@ -158,7 +189,6 @@ class IndexController extends AbstractController
                 $ticker = $poloTicker->getTicker();
 
 
-
                 $btcPrice = $ticker['BTC/USDT']['bid'];
                 $ethPrice = $ticker['ETH/USDT']['bid'];
 
@@ -177,15 +207,30 @@ class IndexController extends AbstractController
 
         $entityManager->persist($coinObject);
         $entityManager->flush();
-
-        dd($coinObject, $price);
-        dd('GET the price done');
-
     }
+
 
     private function call($exchange, $repository, $entityManager)
     {
 
+        $func = '';
+        switch ($exchange) {
+            case 'poloniex':
+                $func = 'setPoloPrice';
+                break;
+            case 'hitbtc':
+                $func = 'setHitBtcPrice';
+                break;
+            case 'binance':
+                $func = 'setBinancePrice';
+                break;
+            case 'bittrex':
+                $func = 'setBittrexPrice';
+                break;
+            case 'pancakeswap':
+                $func = 'setCakePrice';
+                break;
+        }
         $output = null;
         $retval = null;
         exec("curl -v 'https://web-api.coinmarketcap.com/v1/exchange/market-pairs/latest?aux=num_market_pairs,category,fee_type,market_url,currency_name,currency_slug,effective_liquidity&convert=USD,BTC&limit=500&market_status=active&slug=" . $exchange . "&start=1'", $output, $retval);
@@ -194,7 +239,6 @@ class IndexController extends AbstractController
 
         //dd($response->data->market_pairs);
         foreach ($response->data->market_pairs as $item) {
-            // dd($item);
             $lastCoin = $repository->findOneBy(['slug' => $item->market_pair_base->currency_slug]);
 
 
@@ -209,7 +253,6 @@ class IndexController extends AbstractController
                 $entityManager->persist($coin);
                 $entityManager->flush();
             }
-            //$coin
         }
 
     }

@@ -43,6 +43,16 @@ class Coin
     private $PoloPrice;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cakePrice;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $bittrexPrice;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
      */
     private $binanceMeta = [];
@@ -60,17 +70,9 @@ class Coin
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $bittrexPrice;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
     private $percentage;
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $cakePrice;
+
 
     public function getId(): ?int
     {

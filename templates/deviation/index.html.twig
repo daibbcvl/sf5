@@ -22,12 +22,13 @@
                                 {% for coin in coins %}
                                     <tr>
                                         <td>{{ coin.name }}</td>
-                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'binance'}) }}">{{ coin.binancePrice|number_format(6, '.', ',') }}</a></td>
-                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'hitbtc'}) }}">{{ coin.hitBtcPrice|number_format(6, '.', ',') }}</a></td>
-                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'poloniex'}) }}">{{ coin.poloPrice|number_format(6, '.', ',') }}</a></td>
+                                        <td>{{ coin.binancePrice|number_format(6, '.', ',') }}</td>
+                                        <td>{{ coin.hitBtcPrice|number_format(6, '.', ',') }}</td>
+                                        <td>{{ coin.poloPrice|number_format(6, '.', ',') }}</td>
                                         <td>{{ coin.bittrexPrice|number_format(6, '.', ',') }}</td>
                                         <td>{{ coin.cakePrice|number_format(6, '.', ',') }}</td>
                                         <td>{{ coin.percentage|number_format(2, '.', ',')}} %</td>
+                                        <td><a href="{{ path('get_price', {coin:coin.name, exchange: 'poloniex'}) }}">Price check</a></td>
                                     </tr>
                                 {% endfor %}
                             </table>
