@@ -38,3 +38,8 @@ services:
 
     App\Security\LoginFormInMemoryAuthenticator:
         $userProvider: '@security.user.provider.concrete.backend_users'
+
+#    App\Security\AdminLoginFormAuthenticator:
+#        $userProvider: '@security.user.provider.concrete.app_admin_provider'
+
+

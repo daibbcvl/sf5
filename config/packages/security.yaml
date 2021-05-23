@@ -2,6 +2,8 @@ security:
     encoders:
         App\Entity\User:
             algorithm: auto
+        App\Entity\Admin:
+            algorithm: auto
         Symfony\Component\Security\Core\User\User: 'auto'
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -10,6 +12,11 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+
         backend_users:
             memory:
                 users:
@@ -24,7 +31,18 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/admin/
+            anonymous: ~
+            provider: app_admin_provider
+            guard:
+                authenticators:
+                    - App\Security\AdminLoginFormAuthenticator
+            logout:
+                path: admin_logout
+                target: /admin/login
         main:
+            pattern: ^/
             anonymous: ~
             provider: oauth_hwi
             oauth:
@@ -33,8 +51,8 @@ security:
                     facebook: "/login/check-facebook"
                     google: "/login/check-google"
                     github: "/connect/github/check"
-                login_path: /
-                failure_path: /
+                login_path: /login
+                failure_path: /login
                 default_target_path: /list
                 oauth_user_provider:
                     service: hwi_oauth.user.provider
@@ -46,3 +64,6 @@ security:
                 target: /
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/test, roles: ROLE_USER }
+        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }

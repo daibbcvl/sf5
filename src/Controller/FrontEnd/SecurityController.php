@@ -1,19 +1,30 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\FrontEnd;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/", name="app_login")
+     * @Route("/login", name="app_login")
+     *
+     * @param AuthenticationUtils   $authenticationUtils
+     * @param UrlGeneratorInterface $urlGenerator
+     *
+     * @return Response
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, UrlGeneratorInterface $urlGenerator): Response
     {
+
+        if ($this->isGranted('ROLE_USER')) {
+            return new RedirectResponse($urlGenerator->generate('default'));
+        }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -24,9 +35,11 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/logout", name="app_logout")
+     *
+     * @throws \Exception
      */
     public function logout()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        throw new \Exception('Will be intercepted before getting here');
     }
 }

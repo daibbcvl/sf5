@@ -1,0 +1,7 @@
+framework:
+    assets:
+        packages:
+            appConfig:
+                json_manifest_path: '%kernel.project_dir%/public/build/app_build/manifest.json'
+            adminConfig:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin_build/manifest.json'
