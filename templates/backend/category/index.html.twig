@@ -1,0 +1,37 @@
+{% extends 'admin.html.twig' %}
+
+{#{% form_theme form with 'bootstrap_4_layout.html.twig' only %}#}
+
+{% set breadcrumbs = [{text: 'Category'}, {text: 'List all categories'}] %}
+{% set quick_actions = [{icon: 'flaticon-list', text: 'List all categories'}, {icon: 'flaticon-add', url: path('category_create'), text: 'Create a category'}] %}
+
+{% block title %}List Categories{% endblock %}
+{% block subheader_title %}List all categories{% endblock %}
+{% block content %}
+    <div class="m-content">
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs m--padding-30">
+            <div class="table-responsive-lg m-datatable m-datatable--default">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Slug</th>
+                        <th scope="col">Created at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pager.currentPageResults %}
+                        {% set level = item.level %}
+                        <tr class="row-clickable" data-href="{{ path('category_edit', {id: item.id}) }}" title="{{ path('category_edit', {id: item.id}) }}">
+                            <td>{% for i in 0..level %}&nbsp;&nbsp;{% endfor %} {{ item.name }}</td>
+                            <td>{{ item.categorySlug }}</td>
+                            <td>{{ item.createdAt|date('Y-m-d h:i') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include 'pager.html.twig' with {pager: pager} %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

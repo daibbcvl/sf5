@@ -1,0 +1,38 @@
+{% extends 'admin.html.twig' %}
+
+{% set breadcrumbs = [{url: path('user_index'), text: 'User'}, {text: 'Edit'}] %}
+{% set quick_actions = [{icon: 'flaticon-list', url: path('user_index'), text: 'List'}, {icon: 'flaticon-add', url: path('user_create'), text: 'Create'}] %}
+
+{% block title %}Edit User{% endblock %}
+{% block subheader_title %}Edit a user{% endblock %}
+{% block content %}
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs m--padding-30">
+            <div class="row">
+                <div class="col-lg-8 col-xl-6">
+                    {% if warning %}
+                        <div class="alert alert-warning m-alert m-alert--air m-alert--outline m-alert--outline-2x" role="alert">
+                            <strong>Warning!</strong> {{ warning }}
+                        </div>
+                    {% endif %}
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group row">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button class="btn btn-primary m-btn m-btn--icon" type="submit">
+                                <i class="la la-save"></i>
+                                Update
+                            </button>
+                            <button class="btn btn-outline-primary m-btn m-btn--icon" type="submit" name="redirect_url" value="{{ path('user_index') }}">
+                                <i class="flaticon-list"></i>
+                                Update & back to list
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -20,6 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Form/Event'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -39,7 +40,8 @@ services:
     App\Security\LoginFormInMemoryAuthenticator:
         $userProvider: '@security.user.provider.concrete.backend_users'
 
-#    App\Security\AdminLoginFormAuthenticator:
-#        $userProvider: '@security.user.provider.concrete.app_admin_provider'
-
+    App\EventListener\TimestampableSubscriber:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, lazy: true }
+            - { name: doctrine.event_listener, event: preUpdate, lazy: true }
 

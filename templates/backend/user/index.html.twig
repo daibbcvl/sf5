@@ -1,0 +1,89 @@
+{% extends 'admin.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% set breadcrumbs = [{text: 'User'}, {text: 'List'}] %}
+{% set quick_actions = [{icon: 'flaticon-list', text: 'List'}, {icon: 'flaticon-add', url: path('user_create'), text: 'Create'}] %}
+
+{% block title %}List User{% endblock %}
+{% block subheader_title %}List all users{% endblock %}
+{% block content %}
+    <div class="m-content">
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs m--padding-30">
+            {{ form_start(form) }}
+            <div class="m-form m-form--label-align-right m--margin-bottom-20">
+                <div class="row align-items-center">
+                    <div class="col-xl-6">
+                        <div class="form-group m-form__group row align-items-center" style="padding-bottom: 0;">
+                            <div class="col-md-4 col-xl-5 m--margin-bottom-20-mobile">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        {{ form_label(form.enabled) }}
+                                    </div>
+                                    <div class="m-form__control">
+                                        {{ form_widget(form.enabled) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-xl-7">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        {{ form_label(form.email) }}
+                                    </div>
+                                    <div class="m-form__control">
+                                        {{ form_widget(form.email) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                    </div>
+                    <div class="col-xl-4">
+                        <button class="btn btn-primary m-btn m-btn--custom" type="submit">
+                            <i class="flaticon-search"></i>
+                            Search
+                        </button>
+                        <a href="{{ path('user_index') }}" class="btn btn-default m-btn m-btn--custom">Reset</a>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+
+            <div class="table-responsive-lg m-datatable m-datatable--default">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pager.currentPageResults %}
+                        <tr class="row-clickable" data-href="{{ path('user_edit', {id: item.id}) }}" title="{{ path('user_edit', {id: item.id}) }}">
+                            <td>{{ item.email }}</td>
+                            <td>{{ item.fullName }}</td>
+                            <td>
+                                {% if item.hasRole('ROLE_ADMIN') %}
+                                    <span class="text-danger">Admin</span>
+                                {% else %}
+                                    User
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if item.enabled %}
+                                    <span class="badge badge-success">Enabled</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Disabled</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include 'pager.html.twig' with {pager: pager} %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

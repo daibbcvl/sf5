@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,32 +39,30 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    /**
+     * @param array $criteria
+     * @param array $sort
+     *
+     * @return Pagerfanta
+     */
+    public function search(array $criteria, array $sort): Pagerfanta
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('u');
+        if (isset($criteria['email'])) {
+            $queryBuilder->andWhere('u.email LIKE :email')->setParameter('email', "{$criteria['email']}%");
+            unset($criteria['email']);
+        }
+        foreach ($criteria as $field => $value) {
+            if (null !== $value) {
+                $queryBuilder->andWhere("u.$field = :$field")->setParameter($field, $value);
+            }
+        }
+        foreach ($sort as $field => $direction) {
+            $queryBuilder = $queryBuilder->orderBy("u.$field", $direction);
+        }
+        $adapter = new QueryAdapter($queryBuilder);
+
+        return new Pagerfanta($adapter);
     }
-    */
 }

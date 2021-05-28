@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\Type\UserCreateType;
 use App\Form\Type\UserEditType;
 use App\Form\Type\UserSearchType;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,13 +31,16 @@ class UserController extends AbstractController
     public function index(Request $request, UserRepository $userRepository): Response
     {
 
-        dd('User manager');
+
         $form = $this->createForm(UserSearchType::class);
+
+
         $form->handleRequest($request);
         $criteria = $form->getData() ?: [];
         $page = $request->get('page', 1);
         $size = $request->get('size', 10);
         $sort = $request->get('sort', ['id' => 'desc']);
+
 
         return $this->render('backend/user/index.html.twig', [
             'form' => $form->createView(),

@@ -1,0 +1,33 @@
+{% extends 'admin.html.twig' %}
+
+{% set breadcrumbs = [{url: path('user_index'), text: 'User'}, {text: 'Create'}] %}
+{% set quick_actions = [{icon: 'flaticon-list', url: path('user_index'), text: 'List'}, {icon: 'flaticon-add', text: 'Create'}] %}
+
+{% block title %}Create User{% endblock %}
+{% block subheader_title %}Create a new user{% endblock %}
+{% block content %}
+    <div class="m-content">
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs m--padding-30">
+            <div class="row">
+                <div class="col-lg-8 col-xl-6">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group row">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button class="btn btn-primary m-btn m-btn--icon" type="submit" name="redirect_url" value="{{ path('user_create') }}">
+                                <i class="la la-save"></i>
+                                Create
+                            </button>
+                            <button class="btn btn-outline-primary m-btn m-btn--icon" type="submit" name="redirect_url" value="{{ path('user_index') }}">
+                                <i class="flaticon-list"></i>
+                                Create & back to list
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
