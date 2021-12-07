@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\Type\UserCreateType;
 use App\Form\Type\UserEditType;
 use App\Form\Type\UserSearchType;
-use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,25 +21,16 @@ class UserController extends AbstractController
 {
     /**
      * @Route("", name="user_index", methods={"GET"})
-     *
-     * @param Request        $request
-     * @param UserRepository $userRepository
-     *
-     * @return Response
      */
     public function index(Request $request, UserRepository $userRepository): Response
     {
-
-
         $form = $this->createForm(UserSearchType::class);
-
 
         $form->handleRequest($request);
         $criteria = $form->getData() ?: [];
         $page = $request->get('page', 1);
         $size = $request->get('size', 10);
         $sort = $request->get('sort', ['id' => 'desc']);
-
 
         return $this->render('backend/user/index.html.twig', [
             'form' => $form->createView(),
@@ -50,12 +40,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/create", name="user_create", methods={"GET", "POST"})
-     *
-     * @param Request                      $request
-     * @param EntityManagerInterface       $entityManager
-     * @param UserPasswordEncoderInterface $encoder
-     *
-     * @return Response
      */
     public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder): Response
     {
@@ -84,12 +68,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}", name="user_edit", methods={"GET", "PUT"})
-     *
-     * @param Request                $request
-     * @param User                   $user
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
      */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {

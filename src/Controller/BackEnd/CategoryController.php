@@ -18,11 +18,6 @@ class CategoryController extends AbstractController
 {
     /**
      * @Route("", name="category_index", methods={"GET"})
-     *
-     * @param Request            $request
-     * @param CategoryRepository $categoryRepository
-     *
-     * @return Response
      */
     public function index(Request $request, CategoryRepository $categoryRepository): Response
     {
@@ -39,11 +34,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/create", name="category_create", methods={"GET", "POST"})
-     *
-     * @param Request                $request
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -52,8 +42,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($category->getParent() != null) {
-                $category->setLevel($category->getParent()->getLevel() +1);
+            if (null !== $category->getParent()) {
+                $category->setLevel($category->getParent()->getLevel() + 1);
             }
             $entityManager->persist($category);
             $entityManager->flush();
@@ -73,12 +63,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}", name="category_edit", methods={"GET", "PUT"})
-     *
-     * @param Request                $request
-     * @param Category               $category
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
      */
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
@@ -101,11 +85,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}", name="category_delete", methods={"DELETE"})
-     *
-     * @param Category               $category
-     * @param EntityManagerInterface $entityManager
-     *
-     * @return Response
      */
     public function delete(Category $category, EntityManagerInterface $entityManager): Response
     {

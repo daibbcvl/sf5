@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    const ROLE_USER = 'ROLE_USER';
-    const ROLE_ADMIN = 'ROLE_ADMIN';
+    public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
      * @var int
@@ -85,11 +85,6 @@ class User implements UserInterface
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     *
-     * @return self
-     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -97,17 +92,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUsername(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @return array
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -117,21 +106,11 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    /**
-     * @param string $role
-     *
-     * @return bool
-     */
     public function hasRole(string $role): bool
     {
         return \in_array($role, $this->roles, true);
     }
 
-    /**
-     * @param array $roles
-     *
-     * @return self
-     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -139,11 +118,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @param string $role
-     *
-     * @return self
-     */
     public function addRole(string $role): self
     {
         $this->roles[] = $role;
@@ -159,11 +133,6 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    /**
-     * @param string $password
-     *
-     * @return self
-     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -197,11 +166,6 @@ class User implements UserInterface
         return $this->plainPassword;
     }
 
-    /**
-     * @param string $plainPassword
-     *
-     * @return self
-     */
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
@@ -209,19 +173,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     *
-     * @return self
-     */
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
@@ -239,8 +195,6 @@ class User implements UserInterface
 
     /**
      * @param string $firstName
-     *
-     * @return self
      */
     public function setFirstName(?string $firstName): self
     {
@@ -259,8 +213,6 @@ class User implements UserInterface
 
     /**
      * @param string $lastName
-     *
-     * @return self
      */
     public function setLastName(?string $lastName): self
     {
@@ -269,17 +221,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFullName(): string
     {
         return trim("$this->firstName $this->lastName");
     }
 
-    /**
-     * @return string
-     */
     public function getDisplayName(): string
     {
         return (!$this->firstName && !$this->lastName) ? $this->email : $this->getFullName();

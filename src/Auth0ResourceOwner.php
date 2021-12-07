@@ -8,35 +8,35 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Auth0ResourceOwner extends GenericOAuth2ResourceOwner
 {
-    protected $paths = array(
+    protected $paths = [
         'identifier' => 'user_id',
         'nickname' => 'nickname',
         'realname' => 'name',
         'email' => 'email',
         'profilepicture' => 'picture',
-    );
+    ];
 
-    public function getAuthorizationUrl($redirectUri, array $extraParameters = array())
+    public function getAuthorizationUrl($redirectUri, array $extraParameters = [])
     {
-        return parent::getAuthorizationUrl($redirectUri, array_merge(array(
+        return parent::getAuthorizationUrl($redirectUri, array_merge([
             'audience' => $this->options['audience'],
-        ), $extraParameters));
+        ], $extraParameters));
     }
 
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'authorization_url' => '{base_url}/authorize',
             'access_token_url' => '{base_url}/oauth/token',
             'infos_url' => '{base_url}/userinfo',
             'audience' => '{base_url}/userinfo',
-        ));
+        ]);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'base_url',
-        ));
+        ]);
 
         $normalizer = function (Options $options, $value) {
             return str_replace('{base_url}', $options['base_url'], $value);

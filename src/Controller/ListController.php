@@ -11,12 +11,12 @@ class ListController extends AbstractController
 {
     /**
      * @Route("/list", name="list")
-     * @param Request $request
+     *
      * @return Response
      */
     public function index(Request $request)
     {
-       // dd($this->getUser());
+        // dd($this->getUser());
         $companies = [
             'Apple' => '$1.16 trillion USD',
             'Samsung' => '$298.68 billion USD',
@@ -37,12 +37,11 @@ class ListController extends AbstractController
 
     /**
      * @Route("/test", name="test")
-     * @param Request $request
+     *
      * @return Response
      */
     public function test(Request $request)
     {
-        dd($this->getUser());
-        dd('This is test action');
+        return new Response('ok');
     }
 }

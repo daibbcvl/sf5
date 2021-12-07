@@ -9,8 +9,5 @@ interface SoftDeletableInterface
      */
     public function isDeleted();
 
-    /**
-     * @param bool $deleted
-     */
     public function setDeleted(bool $deleted);
 }

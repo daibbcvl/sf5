@@ -32,10 +32,11 @@ class CategoryType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => function (Category $category) {
                     $space = '';
-                    for ($i = 0; $i < $category->getLevel(); $i++) {
+                    for ($i = 0; $i < $category->getLevel(); ++$i) {
                         $space .= '--';
                     }
-                    return $space . $category->getName();
+
+                    return $space.$category->getName();
                 },
                 'placeholder' => 'Select parent',
             ])

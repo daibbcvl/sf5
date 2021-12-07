@@ -13,15 +13,9 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/admin/login", name="admin_login")
-     *
-     * @param AuthenticationUtils   $authenticationUtils
-     * @param UrlGeneratorInterface $urlGenerator
-     *
-     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils, UrlGeneratorInterface $urlGenerator): Response
     {
-
         if ($this->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse($urlGenerator->generate('dashboard_index'));
         }

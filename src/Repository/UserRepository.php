@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -39,13 +38,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-
-    /**
-     * @param array $criteria
-     * @param array $sort
-     *
-     * @return Pagerfanta
-     */
     public function search(array $criteria, array $sort): Pagerfanta
     {
         $queryBuilder = $this->createQueryBuilder('u');

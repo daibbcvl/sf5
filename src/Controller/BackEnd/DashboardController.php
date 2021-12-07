@@ -2,7 +2,6 @@
 
 namespace App\Controller\BackEnd;
 
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

@@ -13,17 +13,11 @@ trait SoftDeletableTrait
      */
     private $deleted = false;
 
-    /**
-     * @return bool
-     */
     public function isDeleted(): bool
     {
         return $this->deleted;
     }
 
-    /**
-     * @param bool $deleted
-     */
     public function setDeleted(bool $deleted)
     {
         $this->deleted = $deleted;

@@ -11,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category implements SoftDeletableInterface, TimestampableInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use SoftDeletableTrait;
+    use TimestampableTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -46,6 +47,7 @@ class Category implements SoftDeletableInterface, TimestampableInterface
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @var int
      */
     private $level = 0;
@@ -55,11 +57,10 @@ class Category implements SoftDeletableInterface, TimestampableInterface
 //     */
 //    private $posts;
 
-
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->posts = new ArrayCollection();
+        //$this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,7 +150,7 @@ class Category implements SoftDeletableInterface, TimestampableInterface
      */
     public function __toString()
     {
-        $this->name;
+        return $this->name;
     }
 
     public function getCategorySlug(): ?string
@@ -164,21 +165,18 @@ class Category implements SoftDeletableInterface, TimestampableInterface
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getLevel(): int
     {
         return $this->level;
     }
 
     /**
-     * @param int $level
      * @return Category
      */
     public function setLevel(int $level): self
     {
         $this->level = $level;
+
         return $this;
     }
 

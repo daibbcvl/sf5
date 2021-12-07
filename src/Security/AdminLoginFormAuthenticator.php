@@ -42,13 +42,10 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
 
     public function supports(Request $request)
     {
-
-        $support =  self::LOGIN_ROUTE === $request->attributes->get('_route')
+        $support = self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
 
-
         return $support;
-
     }
 
     public function getCredentials(Request $request)
@@ -63,21 +60,17 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
             $credentials['email']
         );
 
-
         return $credentials;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-
             throw new InvalidCsrfTokenException();
         }
 
         $user = $this->entityManager->getRepository(Admin::class)->findOneBy(['email' => $credentials['email']]);
-
 
         if (!$user) {
             // fail authentication with a custom error
@@ -102,7 +95,6 @@ class AdminLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }

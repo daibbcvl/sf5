@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -16,7 +15,7 @@ use Pagerfanta\Pagerfanta;
  * @method Category[]    findAll()
  * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategoryRepository  extends ServiceEntityRepository
+class CategoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -52,12 +51,6 @@ class CategoryRepository  extends ServiceEntityRepository
     }
     */
 
-    /**
-     * @param array $criteria
-     * @param array $sort
-     *
-     * @return Pagerfanta
-     */
     public function search(array $criteria, array $sort): Pagerfanta
     {
         $queryBuilder = $this->createQueryBuilder('c');
