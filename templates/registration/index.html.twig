@@ -9,7 +9,12 @@
                         {{ form_start(form) }}
                         <div class="form_group">
                             <div class="col-md-12 mb-3">
-                                {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <div class="col-md-12 mb-3">
+                                {{ form_row(form.lastName, {'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="form_group">

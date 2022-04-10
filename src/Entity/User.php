@@ -70,6 +70,11 @@ class User implements UserInterface
     private $lastName;
 
     /**
+     * @ORM\OneToOne(targetEntity=Balance::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $balance;
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -239,5 +244,22 @@ class User implements UserInterface
     public function getEnabled(): ?bool
     {
         return $this->enabled;
+    }
+
+    public function getBalance(): ?Balance
+    {
+        return $this->balance;
+    }
+
+    public function setBalance(Balance $balance): self
+    {
+        // set the owning side of the relation if necessary
+        if ($balance->getUser() !== $this) {
+            $balance->setUser($this);
+        }
+
+        $this->balance = $balance;
+
+        return $this;
     }
 }

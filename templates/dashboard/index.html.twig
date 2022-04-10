@@ -1,0 +1,48 @@
+{# templates/list/index.html.twig #} {% extends 'base.html.twig' %} {% block
+    body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="card-header">Wallet Overview</div>
+                        {% if app.user != null %}
+                            <table class="table">
+                                <tr>
+                                    <th>Balance</th>
+                                    <th>{{ balance }}</th>
+                                </tr>
+
+                                <tr>
+                                    <td><a class="btn btn-primary"  href="{{ path('deposit') }}">Deposit</a></td>
+                                    <td><a class="btn btn-warning" href="{{ path('withdraw') }}">Withdraw</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td><a class="list-inline"  href="https://phmlee.blogspot.com/2022/04/les-story.html">Share your story</a></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if app.user == null %}
+                    <a href="{{ path('app_login') }}" class="btn btn-info">
+                        You need to login to see the list 😜😜 >></a
+                    >
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
