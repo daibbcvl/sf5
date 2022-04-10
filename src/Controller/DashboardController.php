@@ -121,7 +121,7 @@ class DashboardController extends AbstractController
                 $this->addFlash('error', "Your balance is not enough");
                 return $this->redirectToRoute('dashboard');
             }
-            $balance->setAmount($balance->getAmount() + $amount);
+            $balance->setAmount($balance->getAmount() - $amount);
             $balance->setUser($user);
             $entityManager->persist($balance);
             $entityManager->flush();
