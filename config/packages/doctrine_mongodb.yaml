@@ -1,0 +1,23 @@
+doctrine_mongodb:
+    auto_generate_proxy_classes: true
+    auto_generate_hydrator_classes: true
+    connections:
+        default:
+            server: 'mongodb://%mongodb_host%:%mongodb_port%'
+            options:
+                username: '%mongodb_user%'
+                password: '%mongodb_password%'
+                authSource: admin
+                socketTimeoutMS: 900000  # increase to 15min - from 300000 milliseconds by default
+                connectTimeoutMS: 900000 # increase to 15min - from  10000 milliseconds by default
+    default_database: '%mongodb_database_name%'
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                App:
+                    is_bundle: false
+                    type: annotation
+                    dir: '%kernel.project_dir%/src/Document'
+                    prefix: 'App\Document'
+                    alias: App
