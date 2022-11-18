@@ -13,9 +13,9 @@ framework:
 
 #        handler_id: session.handler.memcached
 #        name: sess
-#        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
 
-        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
+        #handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
 
 
 
