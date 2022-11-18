@@ -1,0 +1,50 @@
+version: "3.1"
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: sf5-mysql
+    working_dir: /application
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=persistence
+    ports:
+      - "3306:3306"
+
+  webserver:
+    image: nginx:alpine
+    container_name: sf5--webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+
+  memcahed:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
+    container_name: sf5-memcached
+    working_dir: /application
+    volumes:
+      - .:/application
+
+  php-fpm:
+    build: docker/php-fpm
+    container_name: sf5-php
+    working_dir: /application
+    volumes:
+      - .:/application
+
+  mongo:
+    image: mongo:latest
+    container_name: sf5-mongogb
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo

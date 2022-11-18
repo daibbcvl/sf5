@@ -16,7 +16,21 @@ class ListController extends AbstractController
      */
     public function index(Request $request)
     {
-        // dd($this->getUser());
+
+
+//        $memcached = new \Memcached();
+//        $memcached->addServer("165.22.108.72", 11211);
+//        $message = $memcached->get("message");
+//        if ($message) {
+//            dd($message);
+//        } else {
+//            $memcached->set("message", "Hello World");
+//
+//        }
+//        var_dump($memcached->getAllKeys());
+        //$session = $request->getSession();
+
+         //dd($this->getUser());
         $companies = [
             'Apple' => '$1.16 trillion USD',
             'Samsung' => '$298.68 billion USD',

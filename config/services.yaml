@@ -4,6 +4,28 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    memcached_host: '%env(MEMCACHED_HOST)%'
+    memcached_user: '%env(MEMCACHED_USER)%'
+    memcached_password: '%env(MEMCACHED_PASSWORD)%'
+    memcached_port: '%env(MEMCACHED_PORT)%'
+    memcached_session_prefix: 'sess_'
+    memcached_expire: 3600
+
+    memcached.servers:
+        - memcached://memcached:11211
+    memcached.config: { distribution: 'consistent', compression: true }
+
+    memcache_server: '%env(MEMCACHED_HOST)%'
+    memcache_port: 11211
+    session_prefix: sess_
+    session_expire: 86400
+
+    #mongodb_server: "mongodb://mongo:mongo@mongo:27017/?authSource=session_db"
+    mongodb_host: mongo
+    mongodb_port: 27017
+    mongodb_database_name: session_db
+    mongodb_user: mongo
+    mongodb_password: mongo
 
 services:
     # default configuration for services in *this* file
@@ -44,4 +66,23 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist, lazy: true }
             - { name: doctrine.event_listener, event: preUpdate, lazy: true }
+
+    memcached:
+        class: Memcached
+        calls:
+            - [ addServer, [ '%memcache_server%', '%memcache_port%' ] ]
+
+    session.handler.memcached:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        arguments: [ '@memcached', { prefix: '%session_prefix%', expiretime: '%session_expire%' } ]
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL)%'
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler:
+        arguments:
+            - '@doctrine_mongodb.odm.default_connection'
+            - { database: 'session_db', 'collection': 'sessions', username: mongo, password: mongo }
+
 
